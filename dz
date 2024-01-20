@@ -1,0 +1,116 @@
+import sqlite3
+from tkinter import *
+from tkinter import ttk
+from tkinter.messagebox import showerror, showwarning, showinfo
+
+
+class Tkinter:
+    def __init__(self, title="MyOkno", geometry="1000x800"):
+        self.window = Tk()
+        self.window.title(title)
+        self.window.geometry(geometry)
+
+
+
+    def knopki(self, button_text, x_coordinate, y_coordinate):
+        self.button1 = ttk.Button(text=button_text)
+        self.button1.place(x=x_coordinate, y=y_coordinate)
+
+        self.button2 = ttk.Button(text=button_text)
+        self.button2.place(x=x_coordinate, y=y_coordinate)
+
+    def labels(self, label_text, x_coordinate, y_coordinate, foreground, background, font):
+        self.label1 = ttk.Label(text=label_text, foreground=foreground, background=background, font=font)
+        self.label1.place(x=x_coordinate, y=y_coordinate)
+
+        self.label2 = ttk.Label(text=label_text, foreground=foreground, background=background, font=font)
+        self.label2.place(x=x_coordinate, y=y_coordinate)
+
+    def entry_vvod(self, font, justify, width, relx, rely):
+        self.entry1 = ttk.Entry(font=font, justify=justify, width=width)
+        self.entry1.place(relx=relx, rely=rely)
+
+    def check_button(self, text, padding, relx, rely):
+        enabled = IntVar()
+        self.chk_button = ttk.Checkbutton(text=text, padding=padding, variable=enabled)
+        self.chk_button.place(relx=relx, rely=rely)
+
+        self.number = ttk.Label(textvariable=enabled)
+        self.number.place(relx=0.8,rely=0.6)
+
+    def radio_button(self, text, x_coordinate, y_coordinate):
+        self.rad_button = ttk.Radiobutton(text=text)
+        self.rad_button.place(x=x_coordinate, y=y_coordinate)
+
+    def label_info(self, text, x, y):
+        self.info = ttk.Label(text=text)
+        self.info.place(x=x, y=y)
+
+
+    def button_zapis(self, text):
+        self.button = ttk.Button(self.window, text=text, command=self.message_box)
+        self.button.place(x=800, y=200)
+    def entry_info(self):
+        # self.width = width
+        # self.x = x
+        # self.y = y
+        self.vivod = StringVar()
+        self.vivod2 = StringVar()
+        self.vivod3 = StringVar()
+        self.entry_name = ttk.Entry(self.window, textvariable=self.vivod, width=20)
+        self.entry_name.place(x=750, y=125)
+
+
+        self.entry_fam = ttk.Entry(self.window, textvariable=self.vivod2, width=20)
+        self.entry_fam.place(x=775, y=150)
+
+        self.entry_age = ttk.Entry(self.window, textvariable=self.vivod3, width=20)
+        self.entry_age.place(x=760, y=175)
+
+
+    def message_box(self):
+        self.entry = self.entry_name.get()
+        self.entry2 = self.entry_fam.get()
+        self.entry3 = self.entry_age.get()
+        if len(self.entry) != 0:
+            showinfo("Вывод", f"Ваше имя: {self.entry}")
+        else:
+            showerror("Ошибка", "Не введено имя!")
+
+        if len(self.entry2) != 0:
+            showinfo("Вывод", f"Ваша фамилиия: {self.entry2}")
+        else:
+            showerror("Ошибка", "Не введена фамилия!")
+
+        if len(self.entry3) != 0 and self.entry3.isdigit():
+            showinfo("Вывод", f"Ваш возраст: {self.entry3}")
+        else:
+            showerror("Ошибка", "Не введен возраст, либо введен не числовой тип данных!")
+
+
+
+
+    def mainloop(self):
+        self.window.mainloop()
+
+
+tkinter = Tkinter()
+tkinter.knopki("buttt", 550, 750)
+tkinter.knopki("button22", 150, 300)
+tkinter.labels("Text", 500, 600, "yellow", "white", "Arial 50")
+tkinter.labels("LABEL", 300, 150, "purple", "red", "Arial 15")
+tkinter.entry_vvod("Verdana", CENTER, 25, 0.3, 0.5)
+tkinter.check_button("Add + 1", 6, 0.8, 0.5)
+tkinter.radio_button("Нажми на переключатель", 200, 450)
+
+tkinter.label_info("Имя:", 700, 125)
+tkinter.label_info("Фамилия:", 700, 150)
+tkinter.label_info("Возраст:", 700, 175)
+tkinter.entry_info()
+# tkinter.entry_info(20, 750, 125)
+#
+# tkinter.entry_info(20, 775, 150)
+# tkinter.entry_info(20, 760, 175)
+tkinter.button_zapis("Внести данные")
+
+tkinter.mainloop()
